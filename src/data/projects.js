@@ -1,0 +1,143 @@
+import {
+  FaReact,
+  FaLaravel,
+  FaNodeJs,
+  FaAws,
+  FaFigma,
+  FaHtml5,
+  FaPhp,
+} from "react-icons/fa";
+import { FaCss3 } from "react-icons/fa6";
+import {
+  SiTypescript,
+  SiMongodb,
+  SiMysql,
+  SiTailwindcss,
+  SiExpress,
+  SiVite,
+  SiBootstrap,
+  SiGsap,
+  SiJavascript,
+  SiLeaflet,
+  SiCodeigniter,
+} from "react-icons/si";
+
+export const projectCategories = [
+  "All",
+  "Frontend",
+  "Backend",
+  "Fullstack",
+  "UI Design",
+];
+
+export const projects = [
+  {
+    id: 1,
+    title: "SIG-Budaya KLU",
+    description:
+      "Proyek ini adalah aplikasi multi-multi (multi-app/multi-role) dengan fitur RBAC, JWT API, SSO, manajemen file, CRUD generator, dan modul Web-GIS pemetaan situs budaya Lombok Utara (Leaflet.js).",
+    image: "/images/sig-budaya.png",
+    category: "Fullstack",
+    tech: [
+      "Laravel",
+      "MySQL",
+      "Tailwind CSS",
+      "Stisla (Bootstrap 4)",
+      "Vite",
+      "Leaflet.js (GIS)",
+    ],
+    techIcons: [
+      FaReact,
+      FaLaravel,
+      SiMysql,
+      SiTailwindcss,
+      SiVite,
+      SiBootstrap,
+    ],
+    github: "https://github.com/ofikiyok12/SIG-Situs-Budaya",
+    demo: "https://ecommerce-demo.vercel.app",
+    color: "#FFD93D",
+  },
+  {
+    id: 2,
+    title: "App Point of Sale (POS)",
+    description:
+      "Sistem-POS adalah aplikasi Point of Sale (POS) berbasis web yang dibangun dengan Laravel dan MySQL, dirancang untuk membantu bisnis mengelola penjualan, inventaris, dan laporan keuangan secara efisien.",
+    image: "/images/sistem-POS.png",
+    category: "Fullstack",
+    tech: ["Laravel", "MySQL", "Bootstrap", "Tailwind CSS"],
+    techIcons: [FaLaravel, SiMysql, SiBootstrap, SiTailwindcss],
+    github: "https://github.com/ofikiyok12/Sistem-POS",
+    demo: "https://taskflow-demo.vercel.app",
+    color: "#00AEEF",
+  },
+  {
+    id: 3,
+    title: "SIPantaiKLU",
+    description:
+      "sistem interaktif wisata alam pantai berbasis Amazon Web Services (AWS) Lex. Sistem ini menyediakan layanan informasi wisata pantai di Lombok Utara secara interaktif melalui chatbot berbasis web yang didukung oleh media multimedia seperti gambar 360°, peta interaktif, audio narasi, dan teks deskriptif.",
+    image: "/images/sipantaiklu.png",
+    category: "Frontend",
+    tech: [
+      "Html",
+      "Javascript",
+      "CSS",
+      "AWS: Lex, S3 Bucket, Lambda, Cognito...",
+    ],
+    techIcons: [FaNodeJs, SiExpress, SiMongodb, FaAws],
+    github: "https://github.com/ofikiyok12/sipantaiklu",
+    demo: "https://sipantaiklu.vercel.app/",
+    color: "#7ED957",
+  },
+  {
+    id: 4,
+    title: "Portfolio",
+    description:
+      "website portofolio personal single-page dengan sistem dark mode, smooth scroll (Lenis), dan animasi kaya (Framer Motion + GSAP).",
+    image: "/images/portofolio.png",
+    category: "Frontend",
+    tech: ["React", "Vite", "Tailwind CSS", "Framer Motion", "GSAP"],
+    techIcons: [FaReact, SiVite, SiTailwindcss, FaReact, SiGsap],
+    github: "https://github.com/tafaiq/portfoliobuilder",
+    demo: "https://portfoliobuilder-demo.vercel.app",
+    color: "#FF7A00",
+  },
+  {
+    id: 5,
+    title: "Wedding Invitation",
+    description: "Undangan pernikahan online single-page static HTML.",
+    image: "/images/wedding.png",
+    category: "Frontend",
+    tech: ["HTML", "CSS", "Javascipt", "Leaflet"],
+    techIcons: [FaHtml5, FaCss3, SiJavascript, SiLeaflet],
+    github: "https://github.com/tafaiq/chatify",
+    demo: "https://chatify-demo.vercel.app",
+    color: "#FFD93D",
+  },
+  {
+    id: 6,
+    title: "SisparKLU",
+    description:
+      "Sistem Informasi Pariwisata (awalnya Perpustakaan), aplikasi web PHP native untuk manajemen data wisata, galeri, kategori, booking dll...",
+    image: "/images/sisparklu.png",
+    category: "Fullstack",
+    tech: ["CodeIgniter3", "PHP", "MySQL", "AdminLTE"],
+    techIcons: [SiCodeigniter, FaPhp, SiMysql],
+    github: "https://github.com/tafaiq/lms",
+    demo: "https://lms-demo.vercel.app",
+    color: "#7ED957",
+  },
+  {
+    id: 7,
+    title: "SIPus Desktop",
+    description:
+      "Sistem Informasi Perpustakaan (SIPus) berbasis desktop, aplikasi ini dibangun menggunakan VB.Net, MS Access, untuk manajemen data buku",
+    image: "/images/SIPUS.jpg",
+    category: "Desktop App",
+    tech: ["VB.Net", "MS Access"],
+    techIcons: [FaPhp, SiMysql],
+    github: "https://github.com/tafaiq/lms",
+    demo: "https://lms-demo.vercel.app",
+    color: "#7ED957",
+  },
+];
