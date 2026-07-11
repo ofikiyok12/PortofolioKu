@@ -11,6 +11,8 @@ export default function CustomCursor() {
   const springY = useSpring(cursorY, { stiffness: 200, damping: 20 })
 
   useEffect(() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return
+
     const handleMouseMove = (e) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)

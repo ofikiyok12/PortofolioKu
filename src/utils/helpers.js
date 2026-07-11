@@ -5,11 +5,12 @@ export function classNames(...classes) {
 export function scrollToSection(id) {
   if (window.lenis) {
     window.lenis.scrollTo(`#${id}`)
-  } else {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    return
+  }
+  const element = document.getElementById(id)
+  if (element) {
+    const top = element.getBoundingClientRect().top + window.scrollY - 80
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 }
 
