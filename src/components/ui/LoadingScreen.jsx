@@ -3,20 +3,26 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
+  const [show, setShow] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000)
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+      setTimeout(() => setShow(false), 700)
+    }, 2000)
     return () => clearTimeout(timer)
   }, [])
+
+  if (!show) return null
 
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: '-100%' }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center pointer-events-none"
           style={{ backgroundColor: 'var(--cr-bg)' }}
         >
           <motion.div

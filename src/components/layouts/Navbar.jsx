@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import { scrollToSection } from "../../utils/helpers";
 
@@ -56,6 +56,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-8 sm:px-10 lg:px-12">
         <div className="flex items-center justify-between h-16 sm:h-20">
           <motion.button
+            type="button"
             onClick={() => handleClick("hero")}
             className="font-heading text-xl sm:text-2xl px-3 sm:px-4 py-2 rounded-lg"
             style={{
@@ -73,6 +74,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <button
+                type="button"
                 key={link.target}
                 onClick={() => handleClick(link.target)}
                 className="relative px-2.5 py-2 font-body font-semibold text-xs uppercase tracking-wider transition-colors rounded-lg"
@@ -97,6 +99,7 @@ export default function Navbar() {
               </button>
             ))}
             <button
+              type="button"
               onClick={() => handleClick("contact")}
               className="ml-3 px-5 py-2 text-xs font-body font-bold uppercase rounded-lg"
               style={{
@@ -113,6 +116,7 @@ export default function Navbar() {
           </div>
 
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2.5 rounded-xl"
             style={{
@@ -128,49 +132,46 @@ export default function Navbar() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden overflow-hidden"
-            style={{
-              borderTop: "2px solid var(--cr-border)",
-              backgroundColor: "var(--cr-bg)",
-            }}
-          >
-            <div className="px-4 py-4 space-y-2 max-h-[70vh] overflow-y-auto">
-              {navLinks.map((link) => (
-                <button
-                  key={link.target}
-                  onClick={() => handleClick(link.target)}
-                  className="block w-full text-left px-4 py-2.5 font-body font-semibold text-sm rounded-lg"
-                  style={{
-                    color: "var(--cr-text)",
-                    border: "2px solid var(--cr-border)",
-                    backgroundColor: "var(--cr-bg-card)",
-                  }}
-                >
-                  {link.label}
-                </button>
-              ))}
+      {isOpen && (
+        <div
+          className="lg:hidden overflow-hidden"
+          style={{
+            borderTop: "2px solid var(--cr-border)",
+            backgroundColor: "var(--cr-bg)",
+          }}
+        >
+          <div className="px-4 py-4 space-y-2 max-h-[70vh] overflow-y-auto">
+            {navLinks.map((link) => (
               <button
-                onClick={() => handleClick("contact")}
-                className="w-full px-5 py-2.5 font-body font-bold text-sm uppercase text-center rounded-lg"
+                key={link.target}
+                type="button"
+                onClick={() => handleClick(link.target)}
+                className="block w-full text-left px-4 py-2.5 font-body font-semibold text-sm rounded-lg"
                 style={{
-                  backgroundColor: "var(--cr-accent)",
                   color: "var(--cr-text)",
-                  border: "3px solid var(--cr-border)",
-                  boxShadow: "4px 4px 0px var(--cr-border)",
+                  border: "2px solid var(--cr-border)",
+                  backgroundColor: "var(--cr-bg-card)",
                 }}
               >
-                Hire Me
+                {link.label}
               </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+            <button
+              type="button"
+              onClick={() => handleClick("contact")}
+              className="w-full px-5 py-2.5 font-body font-bold text-sm uppercase text-center rounded-lg"
+              style={{
+                backgroundColor: "var(--cr-accent)",
+                color: "var(--cr-text)",
+                border: "3px solid var(--cr-border)",
+                boxShadow: "4px 4px 0px var(--cr-border)",
+              }}
+            >
+              Hire Me
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
