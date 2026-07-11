@@ -6,6 +6,7 @@ import {
   FaArrowUp,
   FaHeart,
   FaWhatsapp,
+  FaCode,
 } from "react-icons/fa";
 import { socialLinks } from "../../utils/helpers";
 
@@ -50,7 +51,7 @@ export default function Footer() {
               className="font-body text-sm mt-1"
               style={{ color: "var(--cr-text-subtle)" }}
             >
-              Fullstack Web Developer
+              Web Developer
             </p>
           </div>
 
@@ -81,7 +82,8 @@ export default function Footer() {
               className="font-body text-sm flex items-center justify-center lg:justify-end gap-1"
               style={{ color: "var(--cr-text-muted)" }}
             >
-              Made with <FaHeart className="text-red-500" /> by Taufiq Andrian
+              Made with Vibe
+              <FaCode className="text-red-500" /> by Taufiq Andrian
             </p>
             <p
               className="font-body text-xs mt-1"

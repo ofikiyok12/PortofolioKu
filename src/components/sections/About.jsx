@@ -18,7 +18,7 @@ const funFacts = [
   { icon: FaGuitar, label: "Love Music", color: "bg-accent" },
   { icon: FaLaptop, label: "Love Tech", color: "bg-secondary" },
   { icon: FaHeart, label: "Love Open Source", color: "bg-green" },
-  { icon: FaCode, label: "Code Daily", color: "bg-primary" },
+  { icon: FaCode, label: "Vibe Engineer", color: "bg-primary" },
 ];
 
 const timeline = [
