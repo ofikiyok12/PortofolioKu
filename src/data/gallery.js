@@ -1,38 +1,10 @@
 export const galleryImages = [
-  {
-    id: 1,
-    src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=500&fit=crop',
-    alt: 'Coding setup',
-    caption: 'Late Night Coding',
-  },
-  {
-    id: 2,
-    src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=500&fit=crop',
-    alt: 'Workspace',
-    caption: 'My Workspace Vibes',
-  },
-  {
-    id: 3,
-    src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=500&fit=crop',
-    alt: 'Code editor',
-    caption: 'Code in Motion',
-  },
-  {
-    id: 4,
-    src: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=500&fit=crop',
-    alt: 'Coffee and code',
-    caption: 'Coffee + Code = Love',
-  },
-  {
-    id: 5,
-    src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=500&fit=crop',
-    alt: 'Team meeting',
-    caption: 'Team Collaboration',
-  },
-  {
-    id: 6,
-    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    alt: 'Portrait',
-    caption: 'Focus Mode',
-  },
+  { id: 1, src: '/images/gallery/1.png', alt: 'Gallery image 1', caption: 'Snapshot #1' },
+  { id: 2, src: '/images/gallery/2.png', alt: 'Gallery image 2', caption: 'Snapshot #2' },
+  { id: 3, src: '/images/gallery/3.png', alt: 'Gallery image 3', caption: 'Snapshot #3' },
+  { id: 4, src: '/images/gallery/4.png', alt: 'Gallery image 4', caption: 'Snapshot #4' },
+  { id: 5, src: '/images/gallery/5.png', alt: 'Gallery image 5', caption: 'Snapshot #5' },
+  { id: 6, src: '/images/gallery/6.png', alt: 'Gallery image 6', caption: 'Snapshot #6' },
+  { id: 7, src: '/images/gallery/7.png', alt: 'Gallery image 7', caption: 'Snapshot #7' },
+  { id: 8, src: '/images/gallery/8.jpeg', alt: 'Gallery image 8', caption: 'Snapshot #8' },
 ]

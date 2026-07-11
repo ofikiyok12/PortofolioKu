@@ -1,12 +1,14 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import SectionHeading from '../ui/SectionHeading'
+import GalleryModal from '../ui/GalleryModal'
 import { galleryImages } from '../../data/gallery'
 import { useInView } from '../../hooks/useInView'
 
-const rotations = [0, 3, -2, 4, -3, 2]
+const rotations = [0, 3, -2, 4, -3, 2, -1, 5]
 
 export default function Gallery() {
+  const [selectedIndex, setSelectedIndex] = useState(null)
   const [ref, isInView] = useInView()
 
   const imagesWithRotation = useMemo(() => {
@@ -15,6 +17,14 @@ export default function Gallery() {
       rotation: rotations[i % rotations.length],
     }))
   }, [])
+
+  const handlePrev = () => {
+    setSelectedIndex((prev) => (prev === 0 ? imagesWithRotation.length - 1 : prev - 1))
+  }
+
+  const handleNext = () => {
+    setSelectedIndex((prev) => (prev === imagesWithRotation.length - 1 ? 0 : prev + 1))
+  }
 
   return (
     <section id="gallery" className="relative py-20 sm:py-28" style={{ backgroundColor: 'var(--cr-bg)' }}>
@@ -40,7 +50,8 @@ export default function Gallery() {
                     boxShadow: '6px 6px 0px var(--cr-border)',
                   }}
                   whileHover={{ scale: 1.04, rotate: 0, zIndex: 10, transition: { duration: 0.2 } }}
-                  className={`p-2.5 pb-10 sm:p-3 sm:pb-12 rounded-2xl relative group ${
+                  onClick={() => setSelectedIndex(index)}
+                  className={`p-2.5 pb-10 sm:p-3 sm:pb-12 rounded-2xl relative group cursor-pointer ${
                     isMiddle ? 'lg:translate-y-6' : ''
                   }`}
                 >
@@ -62,6 +73,14 @@ export default function Gallery() {
           </div>
         </div>
       </div>
+
+      <GalleryModal
+        images={imagesWithRotation}
+        selectedIndex={selectedIndex}
+        onClose={() => setSelectedIndex(null)}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      />
     </section>
   )
 }

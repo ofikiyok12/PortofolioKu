@@ -3,9 +3,13 @@ export function classNames(...classes) {
 }
 
 export function scrollToSection(id) {
-  const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
+  if (window.lenis) {
+    window.lenis.scrollTo(`#${id}`)
+  } else {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 }
 

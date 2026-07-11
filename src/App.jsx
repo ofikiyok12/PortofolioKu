@@ -27,6 +27,8 @@ function AppContent() {
       smoothWheel: true,
     });
 
+    window.lenis = lenis;
+
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -34,7 +36,10 @@ function AppContent() {
 
     requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    return () => {
+      window.lenis = null;
+      lenis.destroy();
+    };
   }, []);
 
   return (
