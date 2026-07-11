@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 import {
   FaReact,
   FaGitAlt,
@@ -45,110 +45,135 @@ export default function Hero() {
   const reduce = useReducedMotion();
   const { containerVariants, itemVariants } = useVariants(reduce);
   const photoRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const sectionRef = useRef(null);
+  const [isInView, setIsInView] = useState(true);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const tiltRef = useRef(null);
 
   const handleMouseMove = useCallback((e) => {
-    if (!photoRef.current || reduce) return;
-    const rect = photoRef.current.getBoundingClientRect();
+    const el = tiltRef.current || photoRef.current;
+    if (!el || reduce) return;
+    const rect = el.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const x = (e.clientX - centerX) / (rect.width / 2);
     const y = (e.clientY - centerY) / (rect.height / 2);
-    setTilt({ x: y * -10, y: x * 10 });
+    el.style.transform = `rotateX(${y * -10}deg) rotateY(${x * 10}deg)`;
   }, [reduce]);
 
   const handleMouseLeave = useCallback(() => {
-    setTilt({ x: 0, y: 0 });
+    const el = tiltRef.current || photoRef.current;
+    if (!el) return;
+    el.style.transform = "rotateX(0deg) rotateY(0deg)";
   }, []);
 
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="relative min-h-[100dvh] pt-16 sm:pt-20 overflow-hidden"
       style={{ backgroundColor: "var(--cr-bg)" }}
     >
       <div className="absolute inset-0 grid-bg opacity-[0.03]" />
 
       {/* Decorative blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none will-change-transform">
         <div
-          className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-3xl"
+          className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-xl"
           style={{
             backgroundColor:
               "color-mix(in srgb, var(--cr-primary) 20%, transparent)",
+            transform: "translateZ(0)",
           }}
         />
         <div
-          className="absolute -bottom-32 -left-20 w-96 h-96 rounded-full blur-3xl"
+          className="absolute -bottom-32 -left-20 w-96 h-96 rounded-full blur-xl"
           style={{
             backgroundColor:
               "color-mix(in srgb, var(--cr-secondary) 15%, transparent)",
+            transform: "translateZ(0)",
           }}
         />
         <div
-          className="absolute top-1/3 left-1/4 w-64 h-64 rounded-full blur-3xl"
+          className="absolute top-1/3 left-1/4 w-64 h-64 rounded-full blur-xl"
           style={{
             backgroundColor:
               "color-mix(in srgb, var(--cr-accent) 10%, transparent)",
+            transform: "translateZ(0)",
           }}
         />
       </div>
 
       {/* Floating stickers */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <FloatingElement
-          className="top-28 left-[5%] hidden sm:block"
-          delay={0}
-          duration={7}
-          yOffset={-15}
-        >
-          <FaStar className="text-3xl text-primary sticker-shadow" />
-        </FloatingElement>
-        <FloatingElement
-          className="top-40 right-[8%] hidden md:block"
-          delay={1.5}
-          duration={8}
-          yOffset={-12}
-        >
-          <FaBolt className="text-4xl text-accent sticker-shadow" />
-        </FloatingElement>
-        <FloatingElement
-          className="bottom-48 right-[10%] hidden lg:block"
-          delay={2}
-          duration={6}
-        >
-          <FaReact className="text-5xl text-secondary sticker-shadow" />
-        </FloatingElement>
-        <FloatingElement
-          className="bottom-56 left-[8%] hidden lg:block"
-          delay={0.8}
-          duration={9}
-        >
-          <SiJavascript className="text-4xl text-primary sticker-shadow" />
-        </FloatingElement>
-        <FloatingElement
-          className="top-1/3 right-[3%] hidden lg:block"
-          delay={2.5}
-          duration={7}
-          yOffset={-10}
-        >
-          <FaGitAlt className="text-3xl text-accent sticker-shadow" />
-        </FloatingElement>
-        <FloatingElement
-          className="top-60 left-[2%] hidden sm:block"
-          delay={3}
-          duration={5}
-        >
-          <HiSparkles className="text-2xl text-green sticker-shadow" />
-        </FloatingElement>
-        <FloatingElement
-          className="bottom-1/3 right-[15%] hidden lg:block"
-          delay={2.2}
-          duration={7}
-          yOffset={-10}
-        >
-          <FaAws className="text-4xl text-primary sticker-shadow" />
-        </FloatingElement>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none will-change-transform">
+        {isInView && (
+          <>
+            <FloatingElement
+              className="top-28 left-[5%] hidden sm:block"
+              delay={0}
+              duration={7}
+              yOffset={-15}
+            >
+              <FaStar className="text-3xl text-primary sticker-shadow" />
+            </FloatingElement>
+            <FloatingElement
+              className="top-40 right-[8%] hidden md:block"
+              delay={1.5}
+              duration={8}
+              yOffset={-12}
+            >
+              <FaBolt className="text-4xl text-accent sticker-shadow" />
+            </FloatingElement>
+            <FloatingElement
+              className="bottom-48 right-[10%] hidden lg:block"
+              delay={2}
+              duration={6}
+            >
+              <FaReact className="text-5xl text-secondary sticker-shadow" />
+            </FloatingElement>
+            <FloatingElement
+              className="bottom-56 left-[8%] hidden lg:block"
+              delay={0.8}
+              duration={9}
+            >
+              <SiJavascript className="text-4xl text-primary sticker-shadow" />
+            </FloatingElement>
+            <FloatingElement
+              className="top-1/3 right-[3%] hidden lg:block"
+              delay={2.5}
+              duration={7}
+              yOffset={-10}
+            >
+              <FaGitAlt className="text-3xl text-accent sticker-shadow" />
+            </FloatingElement>
+            <FloatingElement
+              className="top-60 left-[2%] hidden sm:block"
+              delay={3}
+              duration={5}
+            >
+              <HiSparkles className="text-2xl text-green sticker-shadow" />
+            </FloatingElement>
+            <FloatingElement
+              className="bottom-1/3 right-[15%] hidden lg:block"
+              delay={2.2}
+              duration={7}
+              yOffset={-10}
+            >
+              <FaAws className="text-4xl text-primary sticker-shadow" />
+            </FloatingElement>
+          </>
+        )}
       </div>
 
       {/* Main content */}
@@ -172,39 +197,43 @@ export default function Hero() {
               style={{ perspective: "800px" }}
             >
               {/* Animated decorative rings */}
-              <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  border: "3px dashed var(--cr-primary)",
-                  margin: "-16px",
-                }}
-                animate={reduce ? false : { rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  border: "2px dashed var(--cr-secondary)",
-                  margin: "-28px",
-                }}
-                animate={reduce ? false : { rotate: -360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              />
+              {isInView && !reduce && (
+                <>
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      border: "3px dashed var(--cr-primary)",
+                      margin: "-16px",
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  />
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      border: "2px dashed var(--cr-secondary)",
+                      margin: "-28px",
+                    }}
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  />
+                </>
+              )}
 
               {/* Photo card */}
               <motion.div
+                ref={tiltRef}
                 className="w-44 sm:w-52 md:w-60 lg:w-72 rounded-full overflow-hidden"
                 style={{
                   border: "6px solid var(--cr-border)",
                   boxShadow: "10px 10px 0px var(--cr-border)",
                   backgroundColor: "var(--cr-bg-card)",
-                  rotateX: tilt.x,
-                  rotateY: tilt.y,
                   transformStyle: "preserve-3d",
                   transformPerspective: "800px",
+                  willChange: "transform",
                 }}
                 animate={
-                  reduce
+                  !isInView || reduce
                     ? false
                     : { y: [0, -8, 0] }
                 }
@@ -227,7 +256,7 @@ export default function Hero() {
                 <motion.span
                   className="text-xl sm:text-2xl lg:text-3xl inline-block"
                   animate={
-                    reduce
+                    !isInView || reduce
                       ? false
                       : { y: [0, -8, 0], rotate: [0, 10, -10, 0] }
                   }
@@ -244,7 +273,7 @@ export default function Hero() {
                 <motion.span
                   className="text-base sm:text-xl lg:text-2xl inline-block"
                   animate={
-                    reduce
+                    !isInView || reduce
                       ? false
                       : { y: [0, 6, 0], rotate: [0, -10, 10, 0] }
                   }
@@ -261,42 +290,42 @@ export default function Hero() {
 
               {/* Floating tech badges */}
               <div
-                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20"
+                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20 will-change-transform"
                 style={{ top: "-14px", right: "-14px", backgroundColor: "var(--cr-bg-card)", border: "2px solid var(--cr-border)", boxShadow: "3px 3px 0px var(--cr-border)" }}
               >
                 <FaReact className="text-sm" style={{ color: "var(--cr-secondary)" }} />
                 <span className="text-xs font-bold uppercase whitespace-nowrap" style={{ color: "var(--cr-text)" }}>React</span>
               </div>
               <div
-                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20"
+                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20 will-change-transform"
                 style={{ top: "30%", left: "-60px", backgroundColor: "var(--cr-bg-card)", border: "2px solid var(--cr-border)", boxShadow: "3px 3px 0px var(--cr-border)", animationDelay: "0.6s" }}
               >
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF7A00' width='14' height='14'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/%3E%3C/svg%3E" alt="" className="w-3.5 h-3.5" />
                 <span className="text-xs font-bold uppercase whitespace-nowrap" style={{ color: "var(--cr-text)" }}>Laravel</span>
               </div>
               <div
-                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20"
+                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20 will-change-transform"
                 style={{ bottom: "30%", right: "-52px", backgroundColor: "var(--cr-bg-card)", border: "2px solid var(--cr-border)", boxShadow: "3px 3px 0px var(--cr-border)", animationDelay: "1.2s" }}
               >
                 <FaAws className="text-sm" style={{ color: "var(--cr-green)" }} />
                 <span className="text-xs font-bold uppercase whitespace-nowrap" style={{ color: "var(--cr-text)" }}>AWS</span>
               </div>
               <div
-                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20"
+                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20 will-change-transform"
                 style={{ bottom: "-14px", left: "-14px", backgroundColor: "var(--cr-bg-card)", border: "2px solid var(--cr-border)", boxShadow: "3px 3px 0px var(--cr-border)", animationDelay: "1.8s" }}
               >
                 <FaFilm className="text-sm" style={{ color: "var(--cr-accent)" }} />
                 <span className="text-xs font-bold uppercase whitespace-nowrap" style={{ color: "var(--cr-text)" }}>Filmora</span>
               </div>
               <div
-                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20"
+                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20 will-change-transform"
                 style={{ top: "50%", left: "-68px", backgroundColor: "var(--cr-bg-card)", border: "2px solid var(--cr-border)", boxShadow: "3px 3px 0px var(--cr-border)", animationDelay: "0.3s" }}
               >
                 <FaMusic className="text-sm" style={{ color: "var(--cr-primary)" }} />
                 <span className="text-xs font-bold uppercase whitespace-nowrap" style={{ color: "var(--cr-text)" }}>Music</span>
               </div>
               <div
-                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20"
+                className="absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full animate-float z-20 will-change-transform"
                 style={{ bottom: "10%", right: "-55px", backgroundColor: "var(--cr-bg-card)", border: "2px solid var(--cr-border)", boxShadow: "3px 3px 0px var(--cr-border)", animationDelay: "0.9s" }}
               >
                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='4' fill='%239B4F96'/%3E%3Ctext x='12' y='17' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold' font-size='11'%3EVB%3C/text%3E%3C/svg%3E" alt="" className="w-3.5 h-3.5" />
@@ -368,7 +397,8 @@ export default function Hero() {
                 View Projects
               </NeoButton>
               <NeoButton
-                href="/resume.pdf"
+                href="/resume.html"
+                download
                 bg="bg-primary"
                 textColor="text-dark"
                 icon={FaDownload}

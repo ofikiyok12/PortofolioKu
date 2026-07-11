@@ -11,7 +11,7 @@ import { socialLinks } from "../../utils/helpers";
 
 const socialItems = [
   { Icon: FaGithub, href: socialLinks.github, label: "GitHub" },
-  { Icon: FaWhatsapp, href: socialLinks.linkedin, label: "Whatsapp" },
+  { Icon: FaWhatsapp, href: socialLinks.whatsapp, label: "WhatsApp" },
   { Icon: FaInstagram, href: socialLinks.instagram, label: "Instagram" },
   { Icon: FaEnvelope, href: `mailto:${socialLinks.email}`, label: "Email" },
 ];

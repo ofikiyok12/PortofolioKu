@@ -30,14 +30,14 @@ const timeline = [
   },
   {
     year: "Backend",
-    event: "PHP, Laravel,Node.js, MySQL...",
+    event: "PHP, Laravel, MySQL, AWS Lambda...",
     icon: FaLaravel,
     color: "bg-primary",
   },
   {
     year: "Cloud & DevOps",
     event:
-      "Amazon Web Services(S3 Bucket, Lambda, Lex, Iam,...),Vercel, Git/github...",
+      "Amazon Web Services (S3 Bucket, Lambda, Lex, Iam,...), Vercel, Git/github...",
     icon: FaCloud,
     color: "bg-accent",
   },
@@ -111,13 +111,13 @@ export default function About() {
                     className="font-body mt-3 leading-relaxed text-sm sm:text-base"
                     style={{ color: "var(--cr-text-muted)" }}
                   >
-                    "Lulusan S1 Rekayasa Perangkat Lunak dengan spesialisasi
-                    pengembangan frontend dan backend web. Menggabungkan
-                    kemampuan teknis coding dan efisiensi teknologi AI melalui
-                    keahlian artificial intelligence prompting, serta didukung
-                    keterampilan kreatif di bidang desain grafis dan editing
-                    video/foto untuk menghadirkan produk digital yang inovatif
-                    dan menarik."
+                    "Saya lulusan S1 Rekayasa Perangkat Lunak dengan
+                    spesialisasi pengembangan frontend dan backend web.
+                    Menggabungkan kemampuan teknis coding dan efisiensi
+                    teknologi AI melalui keahlian artificial intelligence
+                    prompting, serta didukung keterampilan kreatif di bidang
+                    desain grafis dan editing video/foto untuk menghadirkan
+                    produk digital yang inovatif dan menarik."
                   </p>
                   <p
                     className="font-body mt-2 leading-relaxed text-sm sm:text-base"

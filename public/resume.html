@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume - Taufiq Andrian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee&family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f5f0e8;
+        color: #1a1a2e;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .resume {
+        max-width: 900px;
+        width: 100%;
+        background: #fffcf5;
+        border: 4px solid #1a1a2e;
+        box-shadow: 10px 10px 0 #1a1a2e;
+        padding: 50px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 4px solid #1a1a2e;
+      }
+      .header-left h1 {
+        font-family: "Anton", sans-serif;
+        font-size: 48px;
+        line-height: 1;
+        letter-spacing: 1px;
+        color: #1a1a2e;
+      }
+      .header-left h1 span {
+        color: #ff7a00;
+      }
+      .header-left .tagline {
+        font-family: "Bungee", cursive;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background: #ffd93d;
+        display: inline-block;
+        padding: 6px 16px;
+        margin-top: 8px;
+        border: 3px solid #1a1a2e;
+      }
+      .header-right {
+        text-align: right;
+        font-size: 13px;
+        line-height: 2;
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+      .header-right a {
+        color: #1a1a2e;
+        text-decoration: none;
+        border-bottom: 2px solid #ffd93d;
+      }
+      .header-right a:hover {
+        border-color: #ff7a00;
+      }
+
+      .section {
+        margin-bottom: 32px;
+      }
+      .section-title {
+        font-family: "Anton", sans-serif;
+        font-size: 22px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 4px 18px;
+        background: #ffd93d;
+        border: 3px solid #1a1a2e;
+        margin-bottom: 16px;
+      }
+
+      .about-text {
+        font-size: 14px;
+        line-height: 1.8;
+        color: #333;
+      }
+
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .skill-tag {
+        padding: 6px 16px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 3px solid #1a1a2e;
+        background: #fffcf5;
+      }
+      .skill-tag:nth-child(3n + 1) {
+        background: #ffd93d;
+      }
+      .skill-tag:nth-child(3n + 2) {
+        background: #00aeef;
+        color: #fff;
+      }
+      .skill-tag:nth-child(3n + 3) {
+        background: #7ed957;
+      }
+
+      .exp-item {
+        display: flex;
+        gap: 20px;
+        padding: 16px 0;
+        border-bottom: 2px dashed #ddd;
+      }
+      .exp-item:last-child {
+        border-bottom: none;
+      }
+      .exp-left {
+        flex-shrink: 0;
+        width: 100px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #888;
+      }
+      .exp-right h3 {
+        font-size: 16px;
+        font-weight: 800;
+      }
+      .exp-right h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #ff7a00;
+      }
+      .exp-right p {
+        font-size: 13px;
+        color: #555;
+        margin-top: 4px;
+        line-height: 1.6;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .project-card {
+        border: 3px solid #1a1a2e;
+        padding: 16px;
+      }
+      .project-card h3 {
+        font-size: 14px;
+        font-weight: 800;
+      }
+      .project-card .tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .project-card .tech span {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        background: #1a1a2e;
+        color: #fff;
+      }
+      .project-card p {
+        font-size: 12px;
+        color: #555;
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+
+      .contact-line {
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .contact-line strong {
+        min-width: 80px;
+        display: inline-block;
+      }
+
+      @media print {
+        body {
+          padding: 0;
+          background: #fff;
+        }
+        .resume {
+          box-shadow: none;
+          border-width: 3px;
+          padding: 40px;
+        }
+        .section {
+          break-inside: avoid;
+        }
+      }
+      @media (max-width: 600px) {
+        .resume {
+          padding: 24px;
+        }
+        .header {
+          flex-direction: column;
+          gap: 16px;
+        }
+        .header-right {
+          text-align: left;
+        }
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+        .exp-left {
+          width: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="resume">
+      <div class="header">
+        <div class="header-left">
+          <h1>TAUFIQ<br /><span>ANDRIAN</span></h1>
+          <div class="tagline">Web Developer</div>
+        </div>
+        <div class="header-right">
+          <div>📧 taufiqandrian99@gmail.com</div>
+          <div>📞 +62 823-3908-8465</div>
+          <div>🌐 Lombok, NTB, Indonesia</div>
+          <div>
+            🔗 <a href="https://github.com/ofikiyok12">github.com/ofikiyok12</a>
+          </div>
+          <div>📷 <a href="https://instagram.com/Ofikiyok_">@Ofikiyok_</a></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Tentang Saya</div>
+        <p class="about-text">
+          Saya lulusan S1 Rekayasa Perangkat Lunak dengan spesialisasi
+          pengembangan frontend dan backend web. Menggabungkan kemampuan teknis
+          coding dan efisiensi teknologi AI melalui keahlian
+          <em>artificial intelligence prompting</em>, serta didukung
+          keterampilan kreatif di bidang desain grafis dan editing video/foto
+          untuk menghadirkan produk digital yang inovatif dan menarik.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Keahlian</div>
+        <div class="skills-grid">
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS / Tailwind</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Laravel</span>
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">VB.Net</span>
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">Filmora</span>
+          <span class="skill-tag">CapCut</span>
+          <span class="skill-tag">AI Prompting</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Pendidikan</div>
+        <div class="exp-item">
+          <div class="exp-left">2022 – 2025</div>
+          <div class="exp-right">
+            <h3>S1 Rekayasa Perangkat Lunak (S.Kom)</h3>
+            <h4>Universitas Bumigora Mataram</h4>
+            <p>
+              Sarjana di bidang Rekayasa Perangkat Lunak, memperdalam
+              pengembangan aplikasi dan arsitektur perangkat lunak.
+            </p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-left">2018 – 2022</div>
+          <div class="exp-right">
+            <h3>D3 RPL Aplikasi (Amd.Kom)</h3>
+            <h4>Universitas Bumigora Mataram</h4>
+            <p>
+              Diploma di bidang Rekayasa Perangkat Lunak, fokus pada
+              pengembangan aplikasi dan dasar-dasar pemrograman.
+            </p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-left">2015 – 2018</div>
+          <div class="exp-right">
+            <h3>Language Class</h3>
+            <h4>SMA Negeri 1 Tanjung</h4>
+            <p>
+              Pendidikan menengah atas dengan jurusan Bahasa / Language Class.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Proyek</div>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3>SIG-Budaya KLU</h3>
+            <p>
+              Web-GIS pemetaan situs budaya Lombok Utara dengan Leaflet.js,
+              RBAC, JWT API, SSO.
+            </p>
+            <div class="tech">
+              <span>Laravel</span><span>MySQL</span><span>Tailwind</span
+              ><span>Leaflet</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <h3>App Point of Sale (POS)</h3>
+            <p>
+              Aplikasi POS berbasis web untuk mengelola penjualan, inventaris,
+              dan laporan keuangan.
+            </p>
+            <div class="tech">
+              <span>Laravel</span><span>MySQL</span><span>Bootstrap</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <h3>SIPantaiKLU</h3>
+            <p>
+              Sistem interaktif wisata pantai berbasis AWS Lex dengan chatbot,
+              peta interaktif, dan gambar 360&deg;.
+            </p>
+            <div class="tech">
+              <span>HTML</span><span>JS</span><span>AWS Lex</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <h3>SisparKLU</h3>
+            <p>
+              Sistem Informasi Pariwisata — manajemen data wisata, galeri,
+              kategori, dan booking.
+            </p>
+            <div class="tech">
+              <span>CodeIgniter3</span><span>PHP</span><span>MySQL</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <h3>Portfolio Website</h3>
+            <p>
+              Single-page portfolio dengan dark mode, smooth scroll, dan animasi
+              kaya.
+            </p>
+            <div class="tech">
+              <span>React</span><span>Vite</span><span>Tailwind</span
+              ><span>Framer</span>
+            </div>
+          </div>
+          <div class="project-card">
+            <h3>SIPus Desktop</h3>
+            <p>
+              Sistem Informasi Perpustakaan berbasis desktop dengan VB.Net dan
+              MS Access.
+            </p>
+            <div class="tech"><span>VB.Net</span><span>MS Access</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Kontak</div>
+        <div class="contact-line">
+          <strong>Email</strong> taufiqandrian99@gmail.com
+        </div>
+        <div class="contact-line">
+          <strong>WhatsApp</strong> +62 823-3908-8465
+        </div>
+        <div class="contact-line">
+          <strong>GitHub</strong> github.com/ofikiyok12
+        </div>
+        <div class="contact-line"><strong>Instagram</strong> @Ofikiyok_</div>
+      </div>
+    </div>
+    <script>
+      window.onload = () => {
+        setTimeout(() => window.print(), 500);
+      };
+    </script>
+  </body>
+</html>
